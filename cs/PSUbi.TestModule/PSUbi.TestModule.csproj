@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageVersion>0.0.1-pre</PackageVersion>
+		<PackageVersion>0.0.1</PackageVersion>
 		<IncludeContentInPack>true</IncludeContentInPack>
 	</PropertyGroup>
 

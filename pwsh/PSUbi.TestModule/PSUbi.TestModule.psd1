@@ -5,28 +5,28 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule        = 'PSUbi.TestModule.psm1'
+    RootModule           = 'PSUbi.TestModule.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.1'
+    ModuleVersion        = '0.0.1'
 
     # Supported PSEditions
-    # CompatiblePSEditions = @()
+    CompatiblePSEditions = 'Desktop', 'Core'
 
     # ID used to uniquely identify this module
-    GUID              = 'f9d23bc1-9fcc-428a-8e7d-29d28726df1b'
+    GUID                 = 'f9d23bc1-9fcc-428a-8e7d-29d28726df1b'
 
     # Author of this module
-    Author            = 'petteri.stenius@ubisecure.com'
+    Author               = 'petteri.stenius@ubisecure.com'
 
     # Company or vendor of this module
-    CompanyName       = 'Ubisecure'
+    CompanyName          = 'Ubisecure'
 
     # Copyright statement for this module
-    Copyright         = 'Copyright (c) 2024 Ubisecure'
+    Copyright            = 'Copyright (c) 2024 Ubisecure'
 
     # Description of the functionality provided by this module
-    Description       = 'PSUbi.TestModule'
+    Description          = 'PSUbi.TestModule'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
@@ -65,16 +65,16 @@
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = @("Invoke-HelloWorld")
+    FunctionsToExport    = @("Invoke-HelloWorld")
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport   = @()
+    CmdletsToExport      = @()
 
     # Variables to export from this module
-    VariablesToExport = '*'
+    VariablesToExport    = '*'
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport   = @()
+    AliasesToExport      = @()
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
@@ -86,7 +86,7 @@
     # FileList = @()
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-    PrivateData       = @{
+    PrivateData          = @{
 
         PSData = @{
 
