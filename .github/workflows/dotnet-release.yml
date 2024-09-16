@@ -21,18 +21,20 @@ jobs:
         dotnet-version: 8.0.x
         source-url: https://nuget.pkg.github.com/psteniusubi/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - name: Restore dependencies
+        TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Restore .NET
       run: dotnet restore cs/PSUbi.TestModule
     - name: Build .NET
       run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
     - name: Package .NET
       run: dotnet pack --configuration Release cs/PSUbi.TestModule
     - name: Publish .NET
-      run: dotnet nuget push cs/PSUbi.TestModule/bin/Release/*.nupkg
+      run: dotnet nuget push --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
     - name: Package PWSH
       run: dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
     - name: Publish PWSH
       shell: pwsh
+      env:
+        TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
-        Publish-Module -Path pwsh/PSUbi.TestModule/PSUbi.TestModule.psd1 -NuGetApiKey $env:NUGET_AUTH_TOKEN -Verbose
+        Publish-Module -Path "pwsh/PSUbi.TestModule/PSUbi.TestModule.psd1" -NuGetApiKey "$env:TOKEN" -Verbose
