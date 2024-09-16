@@ -6,10 +6,12 @@ on:
   push:
     branches: [ "main" ]
     paths:
+      - "cs/PSUbi.TestModule/**"
       - "pwsh/PSUbi.TestModule/**"
   pull_request:
     branches: [ "main" ]
     paths:
+      - "cs/PSUbi.TestModule/**"
       - "pwsh/PSUbi.TestModule/**"
 
 jobs:
@@ -17,7 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Run tests
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Package PWSH
+      run: dotnet publish --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
+    - name: Test PWSH
       shell: pwsh
       run: |
           Invoke-Pester pwsh/PSUbi.TestModule -PassThru

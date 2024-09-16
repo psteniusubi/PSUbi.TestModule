@@ -33,7 +33,7 @@ jobs:
     - name: Package .NET
       run: dotnet pack --configuration Release cs/PSUbi.TestModule
     - name: Publish .NET
-      run: dotnet nuget push --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
+      run: dotnet nuget push --skip-duplicate --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
     - name: Package PWSH
       run: dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
     - name: Publish PWSH
@@ -41,4 +41,5 @@ jobs:
         TOKEN: ${{secrets.GITHUB_TOKEN}}
       shell: pwsh
       run: |
-        Publish-Module -Path "pwsh/PSUbi.TestModule/PSUbi.TestModule.psd1" -NuGetApiKey "$env:TOKEN" -Verbose
+        Register-PSResourceRepository -Name "psteniusubi" -Uri "https://nuget.pkg.github.com/psteniusubi/index.json"
+        Publish-Module -Path "pwsh/PSUbi.TestModule" -Repository "psteniusubi" -NuGetApiKey "$env:TOKEN" -Verbose
