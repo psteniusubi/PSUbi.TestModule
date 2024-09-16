@@ -16,7 +16,7 @@ on:
       - "cs/PSUbi.TestModule.Tests/**"
 
 jobs:
-  build:
+  dotnet-build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4

@@ -13,7 +13,7 @@ on:
       - "pwsh/PSUbi.TestModule/**"
 
 jobs:
-  build:
+  pwsh-build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
