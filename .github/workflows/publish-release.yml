@@ -6,6 +6,10 @@ name: Publish release (PSUbi.TestModule)
 on:
   release:
     types: [created]
+  push:
+    branches: [ "main" ]
+    paths:
+      - ".github/workflows/publish-release.yml"
 
 jobs:
   publish-release:
