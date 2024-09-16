@@ -1,0 +1,23 @@
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
+
+name: Test (PSUbi.TestModule)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "pwsh/PSUbi.TestModule/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "pwsh/PSUbi.TestModule/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run tests
+      shell: pwsh
+      run: |
+          Invoke-Pester pwsh/PSUbi.TestModule -PassThru
