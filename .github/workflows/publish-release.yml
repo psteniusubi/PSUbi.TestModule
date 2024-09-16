@@ -42,4 +42,4 @@ jobs:
       shell: pwsh
       run: |
         Register-PSResourceRepository -Name "psteniusubi" -Uri "https://nuget.pkg.github.com/psteniusubi/index.json"
-        Publish-Module -Path "pwsh/PSUbi.TestModule" -Repository "psteniusubi" -NuGetApiKey "$env:TOKEN" -Verbose
+        Publish-PSResource -Repository "psteniusubi" -Path "pwsh/PSUbi.TestModule" -ApiKey "$env:TOKEN" -Verbose

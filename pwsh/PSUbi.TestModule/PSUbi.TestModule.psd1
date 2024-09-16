@@ -26,7 +26,7 @@
     Copyright         = 'Copyright (c) 2024 Ubisecure'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'PSUbi.TestModule'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
