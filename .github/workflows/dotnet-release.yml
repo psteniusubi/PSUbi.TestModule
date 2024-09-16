@@ -24,28 +24,15 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore dependencies
       run: dotnet restore cs/PSUbi.TestModule
-    - name: Build
+    - name: Build .NET
       run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
-    - name: Package
+    - name: Package .NET
       run: dotnet pack --configuration Release cs/PSUbi.TestModule
-    - name: Publish
+    - name: Publish .NET
       run: dotnet nuget push cs/PSUbi.TestModule/bin/Release/*.nupkg
-  pwsh-release:
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - name: Package
+    - name: Package PWSH
       run: dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
-    - name: Publish
+    - name: Publish PWSH
       shell: pwsh
       run: |
         Publish-Module -Path pwsh/PSUbi.TestModule/PSUbi.TestModule.psd1 -NuGetApiKey $env:NUGET_AUTH_TOKEN -Verbose
