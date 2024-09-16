@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSUbi.TestModule", "cs\PSUbi.TestModule\PSUbi.TestModule.csproj", "{5BA5405F-3F23-4248-AE83-70074DAFFCBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BA5405F-3F23-4248-AE83-70074DAFFCBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BA5405F-3F23-4248-AE83-70074DAFFCBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BA5405F-3F23-4248-AE83-70074DAFFCBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BA5405F-3F23-4248-AE83-70074DAFFCBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAF5679B-DC3F-43E4-AE37-C673F3BC6CFC}
+	EndGlobalSection
+EndGlobal
