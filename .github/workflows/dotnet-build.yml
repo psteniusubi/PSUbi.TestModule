@@ -8,10 +8,12 @@ on:
     branches: [ "main" ]
     paths:
       - "cs/PSUbi.TestModule/**"
+      - "cs/PSUbi.TestModule.Tests/**"
   pull_request:
     branches: [ "main" ]
     paths:
       - "cs/PSUbi.TestModule/**"
+      - "cs/PSUbi.TestModule.Tests/**"
 
 jobs:
   build:
@@ -22,9 +24,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-        source-url: https://nuget.pkg.github.com/psteniusubi/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

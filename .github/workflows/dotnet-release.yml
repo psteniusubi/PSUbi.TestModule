@@ -23,11 +23,9 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore cs/PSUbi.TestModule
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
     - name: Package
       run: dotnet pack --configuration Release cs/PSUbi.TestModule
     - name: Publish
