@@ -1,14 +1,14 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-net
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
 
-name: Publish package (PSUbi.TestModule)
+name: Publish release (PSUbi.TestModule)
 
 on:
   release:
     types: [created]
 
 jobs:
-  dotnet-release:
+  publish-release:
     runs-on: ubuntu-latest
     permissions:
       packages: write
