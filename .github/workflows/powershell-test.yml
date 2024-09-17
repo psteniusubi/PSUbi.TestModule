@@ -17,7 +17,7 @@ on:
       - ".github/workflows/powershell-test.yml"
 
 jobs:
-  pwsh-build:
+  powershell-test:
     runs-on: windows-latest
     steps:
     - name: Checkout GIT
@@ -26,9 +26,14 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    - name: Install .NET Framework
+      shell: powershell
+      run: |
+        Invoke-WebRequest "https://go.microsoft.com/fwlink/?linkid=2203306" -OutFile sdk.exe
+        sdk.exe /passive /AcceptEULA /norestart
     - name: Package PWSH
-      run: dotnet publish --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
+      run: dotnet publish --framework net4.81 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net481
     - name: Test PWSH
-      shell: pwsh
+      shell: powershell
       run: |
           Invoke-Pester pwsh/PSUbi.TestModule -PassThru
