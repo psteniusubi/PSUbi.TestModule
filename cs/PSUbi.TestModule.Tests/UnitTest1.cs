@@ -7,7 +7,10 @@ namespace PSUbi.TestModule.Tests
         public void TestMethod1()
         {
             var c = new Class1();
-            Assert.IsNotNull(c);
+            var hello = c.HelloWorld();
+            Assert.IsNotNull(hello);
+            Console.WriteLine(hello);
+            Assert.IsTrue(OperatingSystem.IsLinux() || OperatingSystem.IsWindows());
         }
     }
 }

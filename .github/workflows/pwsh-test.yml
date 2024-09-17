@@ -25,7 +25,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Package PWSH
-      run: dotnet publish --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
+      run: dotnet publish --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net8.0
     - name: Test PWSH
       shell: pwsh
       run: |
