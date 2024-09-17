@@ -1,0 +1,34 @@
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
+
+name: Test PowerShell (PSUbi.TestModule)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "cs/PSUbi.TestModule/**"
+      - "pwsh/PSUbi.TestModule/**"
+      - ".github/workflows/powershell-test.yml"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "cs/PSUbi.TestModule/**"
+      - "pwsh/PSUbi.TestModule/**"
+      - ".github/workflows/powershell-test.yml"
+
+jobs:
+  pwsh-build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout GIT
+      uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Package PWSH
+      run: dotnet publish --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net80
+    - name: Test PWSH
+      shell: pwsh
+      run: |
+          Invoke-Pester pwsh/PSUbi.TestModule -PassThru
