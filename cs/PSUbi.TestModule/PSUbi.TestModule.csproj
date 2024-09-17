@@ -6,9 +6,9 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<PackageId>PSUbi.TestModule.Lib</PackageId>
+		<PackageVersion>0.0.1</PackageVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageVersion>0.0.1</PackageVersion>
 		<IncludeContentInPack>true</IncludeContentInPack>
 	</PropertyGroup>
 

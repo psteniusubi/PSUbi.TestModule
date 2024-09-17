@@ -8,11 +8,13 @@ on:
     paths:
       - "cs/PSUbi.TestModule/**"
       - "cs/PSUbi.TestModule.Tests/**"
+      - ".github/workflows/dotnet-build.yml"
   pull_request:
     branches: [ "main" ]
     paths:
       - "cs/PSUbi.TestModule/**"
       - "cs/PSUbi.TestModule.Tests/**"
+      - ".github/workflows/dotnet-build.yml"
 
 jobs:
   dotnet-build:

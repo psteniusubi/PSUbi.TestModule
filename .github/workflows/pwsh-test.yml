@@ -8,11 +8,13 @@ on:
     paths:
       - "cs/PSUbi.TestModule/**"
       - "pwsh/PSUbi.TestModule/**"
+      - ".github/workflows/pwsh-test.yml"
   pull_request:
     branches: [ "main" ]
     paths:
       - "cs/PSUbi.TestModule/**"
       - "pwsh/PSUbi.TestModule/**"
+      - ".github/workflows/pwsh-test.yml"
 
 jobs:
   pwsh-test:

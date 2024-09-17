@@ -47,19 +47,19 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    # RequiredModules = @()
+    RequiredModules      = @()
 
     # Assemblies that must be loaded prior to importing this module
-    # RequiredAssemblies = @()
+    RequiredAssemblies   = @()
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-    # ScriptsToProcess = @()
+    ScriptsToProcess     = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
-    # TypesToProcess = @()
+    TypesToProcess       = @()
 
     # Format files (.ps1xml) to be loaded when importing this module
-    # FormatsToProcess = @()
+    FormatsToProcess     = @()
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     NestedModules        = @("Invoke-HelloWorld.ps1")
@@ -77,10 +77,10 @@
     AliasesToExport      = @()
 
     # DSC resources to export from this module
-    # DscResourcesToExport = @()
+    DscResourcesToExport = @()
 
     # List of all modules packaged with this module
-    # ModuleList = @()
+    ModuleList           = @()
 
     # List of all files packaged with this module
     # FileList = @()
@@ -97,7 +97,7 @@
             # LicenseUri = ''
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/psteniusubi/PSUbi.TestModule'
 
             # A URL to an icon representing this module.
             # IconUri = ''
