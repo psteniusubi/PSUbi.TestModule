@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-net
 
-name: Build and test (PSUbi.TestModule)
+name: Build and test .NET (PSUbi.TestModule)
 
 on:
   push:
