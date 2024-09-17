@@ -18,7 +18,8 @@ jobs:
       packages: write
       contents: read
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout GIT
+      uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -31,7 +32,7 @@ jobs:
     - name: Build .NET
       run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
     - name: Package .NET
-      run: dotnet pack --configuration Release cs/PSUbi.TestModule
+      run: dotnet pack --no-build --configuration Release cs/PSUbi.TestModule
     - name: Publish .NET
       run: dotnet nuget push --skip-duplicate --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
     - name: Package PWSH

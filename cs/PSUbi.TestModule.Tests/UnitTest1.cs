@@ -6,6 +6,8 @@ namespace PSUbi.TestModule.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            var c = new Class1();
+            Assert.IsNotNull(c);
         }
     }
 }
