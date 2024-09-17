@@ -27,10 +27,10 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Install .NET Framework
-      shell: powershell
+      shell: pwsh
       run: |
         Invoke-WebRequest "https://go.microsoft.com/fwlink/?linkid=2203306" -OutFile sdk.exe
-        sdk.exe /passive /AcceptEULA /norestart
+        .\sdk.exe /passive /AcceptEULA /norestart
     - name: Package PWSH
       run: dotnet publish --framework net4.81 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net481
     - name: Test PWSH
