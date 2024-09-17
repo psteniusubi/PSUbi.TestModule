@@ -36,7 +36,9 @@ jobs:
     - name: Publish .NET
       run: dotnet nuget push --skip-duplicate --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
     - name: Package PWSH
-      run: dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net8.0
+      run: |
+        dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net8.0
+        dotnet publish --no-build --framework net481 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net481
     - name: Publish PWSH
       env:
         TOKEN: ${{secrets.GITHUB_TOKEN}}
