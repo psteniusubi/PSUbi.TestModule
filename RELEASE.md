@@ -14,5 +14,5 @@ $ProjectVersion.InnerText = $Version
 $csproj.Save($file)
 
 git commit -a -m "release $Version"
-git tag "$Version"
+git tag "release/$Version"
 ```
