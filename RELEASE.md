@@ -1,7 +1,7 @@
 # Create release
 
 ```powershell
-$Version = [Version]::new("0.0.2")
+$Version = [Version]::new("0.0.3")
 
 Update-ModuleManifest -Path "pwsh/PSUbi.TestModule/PSUbi.TestModule.psd1" -ModuleVersion $Version
 

@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net481</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 		<FileVersion>$(Version)</FileVersion>
 		<PackageId>PSUbi.TestModule.Lib</PackageId>
 		<PackageVersion>$(Version)</PackageVersion>
