@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  batch: true
+  tags:
+   include:
+     - "release/*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack .NET'
+  inputs:
+    command: 'pack'
+    packagesToPack: 'cs/PSUbi.TestModule/*.csproj'
+    versioningScheme: 'off'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Push .NET'
+  inputs:
+    command: 'push'    
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '479af406-8051-4a92-8565-212e80f6cb9b/fc3ef3fd-5bff-43b1-b1fe-33124513434d'
