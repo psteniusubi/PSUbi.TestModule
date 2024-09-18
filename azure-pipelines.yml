@@ -11,12 +11,22 @@ pool:
 
 steps:
 - checkout: self
+  displayName: 'Checkout GIT'
   clean: true
 
 - task: DotNetCoreCLI@2
+  displayName: 'Restore .NET'
   inputs:
-    command: 'build'
+    command: 'restore'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build .NET'
+  inputs:
+    command: 'build'
+    arguments: '--no-restore'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test .NET'
   inputs:
     command: 'test'
+    arguments: '--no-build'
