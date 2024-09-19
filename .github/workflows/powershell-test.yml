@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
 
-name: Test PowerShell (PSUbi.TestModule)
+name: Test PowerShell
 
 on:
   push:

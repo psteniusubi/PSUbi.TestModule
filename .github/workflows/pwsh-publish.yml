@@ -1,7 +1,7 @@
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-net
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
 
-name: Publish release (PSUbi.TestModule)
+name: Publish PWSH
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - ".github/workflows/publish-release.yml"
+      - ".github/workflows/pwsh-publish.yml"
 
 jobs:
   publish-release:
@@ -31,15 +31,11 @@ jobs:
       run: dotnet restore cs/PSUbi.TestModule
     - name: Build .NET
       run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
-    - name: Package .NET
-      run: dotnet pack --no-build --configuration Release cs/PSUbi.TestModule
     - name: Publish .NET
-      run: dotnet nuget push --skip-duplicate --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
-    - name: Package PWSH
       run: |
         dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net8.0
         dotnet publish --no-build --framework net481 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net481
-    - name: Publish PWSH
+    - name: Push PWSH
       env:
         TOKEN: ${{secrets.GITHUB_TOKEN}}
       shell: pwsh
