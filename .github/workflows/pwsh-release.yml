@@ -43,6 +43,12 @@ jobs:
       run: |
         $DestinationPath = New-Item "release" -ItemType "Directory" | Convert-Path
         Compress-PSResource -Path "pwsh/PSUbi.TestModule" -DestinationPath $DestinationPath -Verbose
+    - name: Release PWSH
+      run: |
+        gh release create "$GITHUB_REF_NAME" --draft --title "$GITHUB_REF_NAME" 
+        gh release upload "$GITHUB_REF_NAME" release/*.nupkg
+      env:
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Push PWSH
       env:
         TOKEN: ${{secrets.GITHUB_TOKEN}}
