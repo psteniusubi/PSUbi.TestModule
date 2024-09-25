@@ -26,6 +26,7 @@ jobs:
         source-url: https://nuget.pkg.github.com/psteniusubi/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore .NET
       run: dotnet restore cs/PSUbi.TestModule
     - name: Build .NET
