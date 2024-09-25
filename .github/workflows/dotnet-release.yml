@@ -4,12 +4,12 @@
 name: Publish .NET
 
 on:
-  release:
-    types: [created]
   push:
     branches: [ "main" ]
     paths:
-      - ".github/workflows/dotnet-publish.yml"
+      - ".github/workflows/dotnet-release.yml"
+  push:
+    tags: [ "release/*" ]
 
 jobs:
   publish-release:
@@ -33,5 +33,7 @@ jobs:
       run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
     - name: Package .NET
       run: dotnet pack --no-build --configuration Release cs/PSUbi.TestModule
+    - name: Release .NET
+      run: gh release create "$GITHUB_REF_NAME" cs/PSUbi.TestModule/bin/Release/*.nupkg
     - name: Push .NET
       run: dotnet nuget push --skip-duplicate --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
