@@ -19,7 +19,7 @@ process {
     $null = $xml.Save($csproj)
 
     Write-Host -ForegroundColor Green @"
-git commit -a -m "release $($Version)"
-git tag "release/$($Version)"
+git commit -a -m "release v$($Version)"
+git tag "release/v$($Version)"
 "@
 }
