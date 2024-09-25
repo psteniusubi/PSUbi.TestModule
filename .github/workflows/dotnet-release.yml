@@ -31,7 +31,6 @@ jobs:
     - name: Package .NET
       run: dotnet pack --no-build --configuration Release cs/PSUbi.TestModule
     - name: Release .NET
-      run: echo "GITHUB_REF_NAME = $GITHUB_REF_NAME"
       run: gh release create "$GITHUB_REF_NAME" cs/PSUbi.TestModule/bin/Release/*.nupkg
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
