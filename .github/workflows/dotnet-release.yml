@@ -24,9 +24,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
         source-url: https://nuget.pkg.github.com/psteniusubi/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore .NET
       run: dotnet restore cs/PSUbi.TestModule
     - name: Build .NET
@@ -34,6 +31,11 @@ jobs:
     - name: Package .NET
       run: dotnet pack --no-build --configuration Release cs/PSUbi.TestModule
     - name: Release .NET
+      run: echo "GITHUB_REF_NAME = $GITHUB_REF_NAME"
       run: gh release create "$GITHUB_REF_NAME" cs/PSUbi.TestModule/bin/Release/*.nupkg
+      env:
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Push .NET
-      run: dotnet nuget push --skip-duplicate --api-key "$TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
+      run: dotnet nuget push --skip-duplicate --api-key "$NUGET_AUTH_TOKEN" cs/PSUbi.TestModule/bin/Release/*.nupkg
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
