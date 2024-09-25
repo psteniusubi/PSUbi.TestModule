@@ -1,15 +1,14 @@
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-net
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
 
-name: Publish PWSH
+name: Release PWSH
 
 on:
-  release:
-    types: [created]
   push:
     branches: [ "main" ]
     paths:
-      - ".github/workflows/pwsh-publish.yml"
+      - ".github/workflows/pwsh-release.yml"
+    tags: [ "release/*" ]
 
 jobs:
   publish-release:
@@ -35,10 +34,19 @@ jobs:
       run: |
         dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net8.0
         dotnet publish --no-build --framework net481 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net481
+    - name: Prepare PWSH
+      shell: pwsh
+      run: |
+        Install-PSResource -Name "Microsoft.PowerShell.PSResourceGet" -Version "1.1.0-preview2" -Prerelease -Scope "CurrentUser" -Repository "PSGallery" -TrustRepository -Verbose
+    - name: Pack PWSH
+      shell: pwsh
+      run: |
+        $DestinationPath = New-Item "release" -ItemType "Directory" | Convert-Path
+        Compress-PSResource -Path "pwsh/PSUbi.TestModule" -DestinationPath $DestinationPath -Verbose
     - name: Push PWSH
       env:
         TOKEN: ${{secrets.GITHUB_TOKEN}}
       shell: pwsh
       run: |
         Register-PSResourceRepository -Name "psteniusubi" -Uri "https://nuget.pkg.github.com/psteniusubi/index.json"
-        Publish-PSResource -Repository "psteniusubi" -Path "pwsh/PSUbi.TestModule" -ApiKey "$env:TOKEN" -Verbose
+        Publish-PSResource -Repository "psteniusubi" -NupkgPath "release/*.nupkg" -ApiKey "$env:TOKEN" -Verbose
