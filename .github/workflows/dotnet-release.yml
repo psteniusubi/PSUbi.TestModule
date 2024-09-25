@@ -1,14 +1,13 @@
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-net
 # https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
 
-name: Publish .NET
+name: Release .NET
 
 on:
   push:
     branches: [ "main" ]
     paths:
       - ".github/workflows/dotnet-release.yml"
-  push:
     tags: [ "release/*" ]
 
 jobs:
