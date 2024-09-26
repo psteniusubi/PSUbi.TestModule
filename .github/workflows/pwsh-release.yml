@@ -1,0 +1,58 @@
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-net
+# https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-powershell
+
+name: Release PWSH
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - ".github/workflows/pwsh-release.yml"
+    tags: [ "release/*" ]
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+    steps:
+    - name: Checkout GIT
+      uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        source-url: https://nuget.pkg.github.com/psteniusubi/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Restore .NET
+      run: dotnet restore cs/PSUbi.TestModule
+    - name: Build .NET
+      run: dotnet build --no-restore --configuration Release cs/PSUbi.TestModule
+    - name: Publish .NET
+      run: |
+        dotnet publish --no-build --framework net8.0 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net8.0
+        dotnet publish --no-build --framework net481 --configuration Release cs/PSUbi.TestModule -o pwsh/PSUbi.TestModule/lib/net481
+    - name: Prepare PWSH
+      shell: pwsh
+      run: |
+        Install-PSResource -Name "Microsoft.PowerShell.PSResourceGet" -Version "1.1.0-preview2" -Prerelease -Scope "CurrentUser" -Repository "PSGallery" -TrustRepository -Verbose
+    - name: Pack PWSH
+      shell: pwsh
+      run: |
+        $DestinationPath = New-Item "release" -ItemType "Directory" | Convert-Path
+        Compress-PSResource -Path "pwsh/PSUbi.TestModule" -DestinationPath $DestinationPath -Verbose
+    - name: Release PWSH
+      run: |
+        gh release create "$GITHUB_REF_NAME" --draft --title "$GITHUB_REF_NAME" 
+        gh release upload "$GITHUB_REF_NAME" release/*.nupkg
+      env:
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Push PWSH
+      env:
+        TOKEN: ${{secrets.GITHUB_TOKEN}}
+      shell: pwsh
+      run: |
+        Register-PSResourceRepository -Name "psteniusubi" -Uri "https://nuget.pkg.github.com/psteniusubi/index.json"
+        Publish-PSResource -Repository "psteniusubi" -NupkgPath "release/*.nupkg" -ApiKey "$env:TOKEN" -Verbose
